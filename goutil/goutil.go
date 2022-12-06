@@ -1,5 +1,11 @@
 package goutil
 
+import (
+	"fmt"
+	"os"
+	"json"
+)
+
 func bubbleSort[T any](arr *[]T, compare func(c1 T, c2 T) bool) {
 	n := len(*arr)
 	for i := 0; i < n-1; i++ {
@@ -26,4 +32,18 @@ func prettyPrintStruct[T any](val *[]T) {
 		fmt.Println(string(s))
 		fmt.Println()
 	}
+}
+
+func loadJson[T any](FileName string, inp T) error {
+	content, err := os.ReadFile(FileName)
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(content, &inp)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

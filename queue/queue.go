@@ -19,17 +19,3 @@ func (q *Queue) Pull() (ret interface{}, ok bool) {
 	*q = (*q)[1:]
 	return
 }
-
-func loadJson[T any](FileName string, inp T) error {
-	content, err := os.ReadFile(FileName)
-	if err != nil {
-		return err
-	}
-
-	err = json.Unmarshal(content, &inp)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
